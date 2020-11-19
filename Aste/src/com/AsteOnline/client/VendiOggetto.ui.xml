@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div>
+			<label>Oggetto: </label>
+			<input type="text" ui:field="nome"/>
+			<br></br>
+			<label>Descrizione: </label>
+			<input type="text" ui:field="descrizione"/>
+			<br></br>
+			<label>Prezzo base: </label>
+			<input type="number" ui:field="prezzoBase"/>
+			<br></br>
+			<label>Data scadenza asta</label>
+			<input type="text" ui:field="dataScadenza"/>
+			<label>Categoria</label>
+			<g:ValueListBox ui:field="categoria"/> 
+			<!-- https://stackoverflow.com/questions/3038540/how-do-i-add-items-to-gwt-listbox-in-uibinder-ui-xml-template -->
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

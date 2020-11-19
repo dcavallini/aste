@@ -8,17 +8,17 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>aste.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>com.AsteOnline.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/aste/greet</url-pattern>
+    <url-pattern>/asteonline/greet</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Aste.html</welcome-file>
+    <welcome-file>AsteOnline.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

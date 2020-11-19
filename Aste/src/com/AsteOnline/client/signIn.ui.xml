@@ -1,0 +1,47 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<!-- tutto l'html di signIn-->
+		<div>
+		  <label>Username:</label>
+		  <input type="text" ui:field="username"/>
+		  <br></br>
+		  <label>Nome:</label>
+		  <input type="text" ui:field="nome"/>
+		  <br></br>
+		  <label>Cognome:</label>
+		  <input type="text" ui:field="cognome"/>
+		  <br></br>
+		  <label>Password:</label>
+		  <input type="password" ui:field="password"/>
+		  <br></br>
+		  <label>Telefono:</label>
+		  <input type="text" ui:field="cell"/>
+		  <br></br>
+		  <label>Email:</label>
+		  <input type="text" ui:field="email"/>
+		  <br></br>
+		  <label>Codice fiscale:</label>
+		  <input type="text" ui:field="cf"/>
+		  <br></br>
+		  <label>Indirizzo di domicilio:</label>
+		  <input type="text" ui:field="indirizzo"/>
+		  <br></br>
+		  <label>Sesso:</label>
+		  <input type="text" ui:field="sesso"/>
+		  <br></br>
+		  <label>Data di nascita:</label>
+		  <input type="text" ui:field="dataNascita"/>
+		  <br></br>
+		  <label>Luogo di nascita</label>
+		  <input type="text" ui:field="luogoNascita"/>
+		  <br></br>
+		  
+		  
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 
