@@ -7,26 +7,31 @@ public class Asta implements Serializable{
 
 	String scadenza;
 	boolean esito;
-	Utente utente = new Utente();
+	Utente utenteVenditore = new Utente();
+	Utente utenteOfferente = new Utente();
+	Oggetto oggetto = new Oggetto();
 	
 	public Asta() {
-		
 	}
 	
-	public Asta(Utente utente, String scadenza, boolean esito) {
-		this.utente=utente;
+	public Asta(Utente utenteVenditore, Oggetto oggetto, String scadenza, boolean esito) {
+		this.utenteVenditore=utenteVenditore;
 		this.scadenza=scadenza;
 		this.esito = esito;
+		this.oggetto = oggetto;
 	}
-	
-	public Utente getUtente() {
-		return utente;
+	public Utente getOfferente() {
+		return utenteOfferente;
 	}
-	
+	public Utente getVenditore() {
+		return utenteVenditore;
+	}
+	public Oggetto getOggetto() {
+		return oggetto;
+	}
 	public String getScadenza() {
 		return scadenza;
 	}
-	
 	public boolean getEsito() {
 		return esito;
 	}

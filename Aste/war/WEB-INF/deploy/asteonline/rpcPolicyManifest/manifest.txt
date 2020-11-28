@@ -1,3 +1,3 @@
 # Module asteonline
 # RPC service class, partial path of RPC policy file
-com.AsteOnline.client.GreetingService, 13F11E2AEAEC7AD140E4CA1D6CDA2CC3.gwt.rpc
+com.AsteOnline.client.GreetingService, 2145E3CE84B4281B977711B4AC119E00.gwt.rpc

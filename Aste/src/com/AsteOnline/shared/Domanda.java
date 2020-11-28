@@ -6,13 +6,14 @@ import com.AsteOnline.shared.Utente.Admin;
 import com.AsteOnline.shared.Utente.UtenteRegistrato;
 
 public class Domanda implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 	String idDomanda;
 	String titolo, contenuto;
 	Oggetto oggetto = new Oggetto();
-	Admin admin;
+	//Admin admin;
 	Utente utente = new Utente();
-	UtenteRegistrato utenteR;
+	//UtenteRegistrato utenteR;
 	
 	public Domanda() {
 		
@@ -25,12 +26,19 @@ public class Domanda implements Serializable{
 		this.contenuto=contenuto;
 	}
 	
-	public Domanda(String titolo, String contenuto, Oggetto oggetto, Admin admin, UtenteRegistrato utenteR) {
+	
+	//, Admin admin, UtenteRegistrato utenteR
+	public Domanda(String titolo, String contenuto, Oggetto oggetto) {
 		this.titolo=titolo;
 		this.contenuto=contenuto;
 		this.oggetto=oggetto;
-		this.admin=admin;
-		this.utenteR=utenteR;
+//		this.admin=admin;
+//		this.utenteR=utenteR;
+	}
+	
+	
+	public String getIdDomanda() {
+		return idDomanda;
 	}
 	
 	public String getTitolo() {
@@ -45,11 +53,16 @@ public class Domanda implements Serializable{
 		return oggetto;
 	}
 	
-	public UtenteRegistrato getUtenteRegistrato() {
-		return utenteR;
+	public Utente getUtente() {
+		return utente;
 	}
 	
-	public Admin getAdmin() {
-		return admin;
-	}
+//	public UtenteRegistrato getUtenteRegistrato() {
+//		return utenteR;
+//	}
+//	
+//	public Admin getAdmin() {
+//		return admin;
+//	}
+	
 }

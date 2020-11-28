@@ -15,7 +15,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.ArrayList;
+
+import com.AsteOnline.shared.Oggetto;
+
 public class VisualizzaProfilo extends Composite {
+	
+	Utente utenteLoggato = new Utente();
 
 	private static VisualizzaProfiloUiBinder uiBinder = GWT.create(VisualizzaProfiloUiBinder.class);
 
@@ -26,59 +32,70 @@ public class VisualizzaProfilo extends Composite {
 
 	@UiField InputElement username;
 	
-	public VisualizzaProfilo() {
-		initWidget(uiBinder.createAndBindUi(this));
-		Button salva = new Button("Salva");
-		RootPanel.get().add(salva);
-		
-		salva.addClickHandler(new ClickHandler() {
+	public VisualizzaProfilo( String username) {
+        initWidget(uiBinder.createAndBindUi(this));
+        
+        greetingService.infoUtente(username, new AsyncCallback<Utente>() {
 
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				if(username.getValue().toString().trim().isEmpty()) {
-					Window.alert("Devi riempire il campo ");
-				} else {
-				
-					// TODO Auto-generated method stub
-					greetingService.visualizzaDatiUtente(username.getValue().toString().trim(), new AsyncCallback<Utente>() {
-	
-						@Override
-						public void onFailure(Throwable caught) {
-							Window.alert("Errore nel server");
-						}
-	
-						@Override
-						public void onSuccess(Utente result) {
-						
-							if(result.getUsername()== null || result.getNome()==null ) {
-								Window.alert("Username inesistente");
-							} else {
-//								Window.alert(result.getUsername() + " "+ result.getNome());
-								
-								Label w = new Label();
-								w.getElement().setInnerHTML(
-										"Username : " + result.getUsername() + "<br>" + 
-										"Nome : " + result.getNome() + "<br>" +
-										"Cognome : " + result.getCognome() + "<br>" +
-										"Telefono : " + result.getCell() + "<br>" +
-										"Indirizzo email : " + result.getEmail() + "<br>" +
-										"Codice fiscale : " + result.getCod_fiscale() + "<br>" +
-										"Indirizzo domicilio : " + result.getIndirizzo() + "<br>" +
-										 "<br><br>"); //mancano i campi facoltativi
-								
-//								AsteOnline aste = new AsteOnline();
-//								//ricreo la pagina 
-//								aste.apriPaginaProfilo();
-								RootPanel.get().add(w);
-							}
-						}
-						
-					});
-				}
-			}
-			
-		});
-	}
+ 
+
+            @Override
+            public void onFailure(Throwable caught) {
+                // TODO Auto-generated method stub
+                Window.alert("Non è possibile aprire i dati dell'utente");
+            }
+
+ 
+
+            @Override
+            public void onSuccess(Utente result) {
+                
+                if(result.getUsername()== null || result.getNome()==null ) {
+                    Window.alert("Username inesistente");
+                } else {
+//                    Window.alert(result.getUsername() + " "+ result.getNome());
+                    utenteLoggato=result;
+                    
+                    Label w = new Label();
+                    w.getElement().setInnerHTML(
+                            "Username : " + result.getUsername() + "<br>" + 
+                            "Nome : " + result.getNome() + "<br>" +
+                            "Cognome : " + result.getCognome() + "<br>" +
+                            "Telefono : " + result.getCell() + "<br>" +
+                            "Indirizzo email : " + result.getEmail() + "<br>" +
+                            "Codice fiscale : " + result.getCod_fiscale() + "<br>" +
+                            "Indirizzo domicilio : " + result.getIndirizzo() + "<br>" +
+                             "<br><br>"); //mancano i campi facoltativi
+                    
+//                    AsteOnline aste = new AsteOnline();
+//                    //ricreo la pagina 
+//                    aste.apriPaginaProfilo();
+                    RootPanel.get().add(w);
+                }
+            }
+            
+        });
+        
+        greetingService.oggettiVenduti(utenteLoggato, new AsyncCallback<ArrayList<Oggetto>>() {
+
+ 
+
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("Non è stato possibile prelevare gli oggetti");
+            }
+
+ 
+
+            @Override
+            public void onSuccess(ArrayList<Oggetto> result) {
+                for(int i=0; i<result.size(); i++) {
+                    VisualizzaOggettiVenduti visualizzaOggettiVenduti = new VisualizzaOggettiVenduti(result.get(i)); 
+                    RootPanel.get().add(visualizzaOggettiVenduti);
+                }
+            }
+            
+        });
+    }
 
 }

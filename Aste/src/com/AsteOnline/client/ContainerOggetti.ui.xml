@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	
+		<p ui:field="nomeOggetto"></p>
+		<p ui:field="descrizioneOggetto"></p>
+		<p ui:field="prezzoOggetto"></p>
+		<p ui:field="scadenzaOggetto"></p>
+		<p ui:field="categoriaOggetto"></p>
+		<p ui:field="ultimaOfferta"></p>
+		
+		<input type="text" ui:field="question"></input>
+		<g:Button text="Invia domanda" ui:field="inviaDomanda"/>
+		<input type="text" ui:field="importo"></input>
+		
+		
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

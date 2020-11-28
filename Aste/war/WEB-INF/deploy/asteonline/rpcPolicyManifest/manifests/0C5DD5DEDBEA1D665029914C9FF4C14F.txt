@@ -1,0 +1,2 @@
+serviceClass: com.AsteOnline.client.GreetingService
+path: 2145E3CE84B4281B977711B4AC119E00.gwt.rpc

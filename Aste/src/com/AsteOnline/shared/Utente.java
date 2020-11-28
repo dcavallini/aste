@@ -78,12 +78,13 @@ public class Utente implements Serializable{
 	
 	
 	public class Admin extends Utente{
-		public Admin() {
-			
-		}
 		public Admin(String username, String password) {
 			this.username=username; 
 			this.password=password;
+		}
+
+		public Admin() {
+			// TODO Auto-generated constructor stub
 		}
 	}
 	

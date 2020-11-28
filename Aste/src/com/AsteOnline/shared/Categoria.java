@@ -7,44 +7,87 @@ import com.AsteOnline.shared.Utente.Admin;
 import com.AsteOnline.shared.Utente.UtenteRegistrato;
 
 public class Categoria implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-	
-	String nome;
-	ArrayList<String> sottocategoria;
-	UtenteRegistrato utenteR;
-	Admin admin;
-	Oggetto oggetto;
-	
+
+	private String nome, id;
+	private ArrayList<Categoria> sottocategorie;
+	private int profondita;
+
 	public Categoria() {
-		
+
 	}
 	
-	public Categoria(UtenteRegistrato utenteR, Admin admin, Oggetto oggetto, String nome, ArrayList<String> sottocategoria) {
-		this.utenteR=utenteR;
-		this.admin = admin;
-		this.oggetto = oggetto;
-		this.nome=nome;
-		this.sottocategoria=sottocategoria;
+	public Categoria(String nome, String id, int profondita){
+		this.profondita=profondita;
+		this.nome = nome;
+		sottocategorie = new ArrayList<Categoria>();
+		this.id = id;
+
 	}
 	
-	public UtenteRegistrato getUtenteRegistrato() {
-		return utenteR;
-	}
-	
-	public Admin getAdmin() {
-		return admin;
-	}
-	
-	public Oggetto getOggetto() {
-		return oggetto;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	
-	public ArrayList<String> getSottocategoria(){
-		return sottocategoria;
+	public String getId() {
+		return id;
 	}
 
+	public String getCategoria(){
+
+		return nome;		
+
+	}
+
+	public void setCategoria(String nome) {
+		this.nome = nome;
+	}
+
+    public int getProfondita() {
+    	return profondita;
+    }
+    
+    public void setProfondita(int profondita) {
+    	this.profondita=profondita;
+    }
+    
+	public ArrayList<Categoria> getSottoCategorie(){
+
+		if(sottocategorie.size() == 0){
+			return null;
+		}
+		else {
+			return sottocategorie;
+		}
+	}
+
+	public void setSottoCategorie(ArrayList<Categoria> sottocategorie) {
+
+		if(sottocategorie != null) {
+			this.sottocategorie.addAll(sottocategorie);
+		}
+	}
+
+
+	public void addSottoCategoria(Categoria categoria){
+
+		sottocategorie.add(categoria);
+
+	}
+
+
+	public void removeSottoCategoria(String categoria) {
+
+		for(int i = 0; i < sottocategorie.size(); i++){
+
+			if(sottocategorie.get(i).getCategoria().equals(categoria)){
+
+				sottocategorie.remove(i);
+
+			}
+
+		}
+
+	}
+	
+	public int getSizeSottoCategorie() {
+		return sottocategorie.size();
+	}
 }

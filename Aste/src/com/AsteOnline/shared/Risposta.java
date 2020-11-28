@@ -8,21 +8,35 @@ import com.AsteOnline.shared.Utente.UtenteRegistrato;
 public class Risposta implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	String titolo, contenuto;
-	Oggetto oggetto;
-	Admin admin;
-	UtenteRegistrato utenteR;
+	String titolo, contenuto, idDomanda;
+	Oggetto oggetto= new Oggetto();
+//	Admin admin;
+//	UtenteRegistrato utenteR;
+	Utente utente = new Utente();
+	Domanda domanda = new Domanda();
+	String idRisposta;
 	
 	public Risposta() {
 		
 	}
 	
-	public Risposta(String titolo, String contenuto, Oggetto oggetto, Admin admin, UtenteRegistrato utenteR) {
-		this.titolo=titolo;
+	/*
+	public Risposta(String idRisposta, Domanda domanda, String contenuto, Oggetto oggetto, Utente utente) {
+		this.idRisposta=idRisposta;
+		this.domanda=domanda;
 		this.contenuto=contenuto;
 		this.oggetto=oggetto;
-		this.admin=admin;
-		this.utenteR=utenteR;
+		this.utente=utente;
+	}
+	*/
+	//, Admin admin, UtenteRegistrato utenteR
+	public Risposta(Domanda domanda, String contenuto) {
+		this.domanda=domanda;
+		this.contenuto=contenuto;
+	}
+	
+	public String getIdRisposta() {
+		return idRisposta;
 	}
 	
 	public String getTitolo() {
@@ -37,12 +51,20 @@ public class Risposta implements Serializable{
 		return oggetto;
 	}
 	
-	public UtenteRegistrato getUtenteRegistrato() {
-		return utenteR;
+	public Utente getUtente() {
+		return utente;
 	}
 	
-	public Admin getAdmin() {
-		return admin;
+	public Domanda getDomanda() {
+		return domanda;
 	}
+	
+//	public UtenteRegistrato getUtenteRegistrato() {
+//		return utenteR;
+//	}
+//	
+//	public Admin getAdmin() {
+//		return admin;
+//	}
 
 }

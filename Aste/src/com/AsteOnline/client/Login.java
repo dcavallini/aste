@@ -20,6 +20,8 @@ public class Login extends Composite implements HasText {
 
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 
+	Utente utente = new Utente();
+	
 	interface LoginUiBinder extends UiBinder<Widget, Login> {
 	}
 
@@ -38,7 +40,7 @@ public class Login extends Composite implements HasText {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				
+				/*
 					greetingService.richiestaAccessoUtente(username.getValue().toString(), password.getValue().toString(), new AsyncCallback<Utente>() {
 					
 					@Override
@@ -60,17 +62,68 @@ public class Login extends Composite implements HasText {
 							
 							RootPanel.get().clear();
 							
-							MenuUtenteRegistrato m = new MenuUtenteRegistrato(result.getUsername());
+							MenuUtenteRegistrato m = new MenuUtenteRegistrato(result);
 							RootPanel.get().add(m);
 							
 						} // qui va istanziato il menu per l'utente loggato e gli va passato l'username
 					}
 					
 				});
+				*/
 				
+				greetingService.login(username.getValue().toString(), password.getValue().toString(), new AsyncCallback<Boolean>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Non sei riuscito a loggarti");
+					}
+
+					@Override
+					public void onSuccess(Boolean result) {
+						if(result) {
+							if(username.getValue().toString().equals("admin")) {
+								Utente u = new Utente();
+								Utente admin = u.new Admin("admin", "admin");
+								Window.alert("LogIn eseguito con successo");
+								Window.alert("Benvenuto "+username.getValue().toString());
+								
+								RootPanel.get().clear();
+								
+								MenuUtenteRegistrato m = new MenuUtenteRegistrato(admin);
+								RootPanel.get().add(m);
+							} else {
+								greetingService.infoUtente(username.getValue().toString(), new AsyncCallback<Utente>() {
+									
+									@Override
+									public void onFailure(Throwable caught) {
+										Window.alert("dati utente non trovati");
+									}
+
+									@Override
+									public void onSuccess(Utente result) {
+										Window.alert("LogIn eseguito con successo");
+										Window.alert("Benvenuto "+username.getValue().toString());
+										utente = result;
+										RootPanel.get().clear();
+										MenuUtenteRegistrato m = new MenuUtenteRegistrato(utente);
+										RootPanel.get().add(m);
+										
+
+
+									}
+
+								});
+							}
+						} else {
+							Window.alert("Utente non esistente");
+						}
+					}
+					
+				});
 			}
 			
 		});
+		
 	}
 
 	@Override

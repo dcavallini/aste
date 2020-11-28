@@ -63,7 +63,7 @@ public void onModuleLoad() {
 					
 //				}else if(tokenAttuale.equals("vendiOggetto")) {
 //					apriPaginaVenditaOggetto();
-				}else if(tokenAttuale.equals("visualizzaOggetti")) {
+				}else if(tokenAttuale.equals("visualizzaOggettiSemplice")) {
 					apriVisualizzaOggetti();
 				}
 			}
@@ -83,7 +83,7 @@ public void onModuleLoad() {
 //		Hyperlink vendiOggetto = new Hyperlink("Metti un oggetto in vendita", "vendiOggetto");
 //		RootPanel.get().add(vendiOggetto);
 
-		Hyperlink visualizzaOggetti = new Hyperlink("Visualizza gli oggetti messi in vendita", "visualizzaOggetti");
+		Hyperlink visualizzaOggetti = new Hyperlink("Visualizza gli oggetti messi in vendita", "visualizzaOggettiSemplice");
 		RootPanel.get().add(visualizzaOggetti);
 
 	}
@@ -111,7 +111,7 @@ public void onModuleLoad() {
 	
 	public void apriVisualizzaOggetti() {
 		RootPanel.get().clear();
-		VisualizzaOggetti vo = new VisualizzaOggetti();
+		VisualizzazioneOggettiSemplice vo = new VisualizzazioneOggettiSemplice();
 		RootPanel.get().add(vo);
 	}
 	
