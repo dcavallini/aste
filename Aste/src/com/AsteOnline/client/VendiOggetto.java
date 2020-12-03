@@ -8,6 +8,7 @@ import com.AsteOnline.shared.Oggetto;
 import com.AsteOnline.shared.Utente;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -35,6 +36,7 @@ public class VendiOggetto extends Composite {
 
 	@UiField InputElement nome, descrizione, prezzoBase, dataScadenza;
 	@UiField ValueListBox<String> categoria;
+	@UiField Button invia;
 
 	private final GreetingServiceAsync greetingService=GWT.create(GreetingService.class);
 
@@ -49,18 +51,16 @@ public class VendiOggetto extends Composite {
 
 		final ArrayList<Categoria> totCategorie = new ArrayList<Categoria>();
 
+		//popolo la listbox con le categorie
 		greetingService.inizializzazioneCategorie(new AsyncCallback<ArrayList<Categoria>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
 				Window.alert(caught.toString());
 			}
 
 			@Override
 			public void onSuccess(ArrayList<Categoria> result) {
-				// TODO Auto-generated method stub
-
 
 				for(int i = 0; i < result.size(); i++) {
 					String tmp = result.get(i).getCategoria();
@@ -68,64 +68,45 @@ public class VendiOggetto extends Composite {
 					totCategorie.add(result.get(i));
 				}
 
-
+				categoria.getElement().getStyle().setBackgroundColor("#f1f1f1");
+				categoria.getElement().getStyle().setWidth(1180, Unit.PX);
+				categoria.getElement().getStyle().setPadding(10, Unit.PX);
+				
 				categoria.setAcceptableValues(nomiCategorie);
 			}
 		});
 
-
-
-
-
 		usernameVenditore=utente;
 
-		Button invia = new Button("Salva");
-		RootPanel.get().add(invia);
-
 		invia.addClickHandler(new ClickHandler() {
+			
 			@Override
 			public void onClick(ClickEvent event) {
-
-//				//Window.alert(dataScadenza.getValue().toString());
-//				greetingService.infoUtente(usernameVenditore.getUsername(), new AsyncCallback<Utente> () {
-//
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						// TODO Auto-generated method stub
-//						Window.alert("Non trovo informazioni sul venditore");
-//					}
-//
-//					@Override
-//					public void onSuccess(Utente result) {
-//						// TODO Auto-generated method stub
-//						venditore=result; //prendo tutto il venditore 
-//						
-//					}
-//
-//				});
 				
-				//Window.alert(usernameVenditore.getUsername());
+				if(!nome.getValue().isEmpty() &&
+					!descrizione.getValue().isEmpty() &&
+					!prezzoBase.getValue().isEmpty() &&
+					!dataScadenza.getValue().isEmpty() &&
+					categoria.getValue()!=null) {
+				
+					//metto l'oggetto in vendita
+					greetingService.vendiOggetto(usernameVenditore, nome.getValue().toString().trim(), descrizione.getValue().toString().trim(), Double.parseDouble(prezzoBase.getValue()), dataScadenza.getValue().toString(), categoria.getValue().toString(), new AsyncCallback<Oggetto>() {
 
-				greetingService.vendiOggetto(usernameVenditore, nome.getValue().toString().trim(), descrizione.getValue().toString().trim(), Double.parseDouble(prezzoBase.getValue()), dataScadenza.getValue().toString(), categoria.getValue().toString(), new AsyncCallback<Oggetto>() {
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("Impossibile mettere l'oggetto in vendita"); //in GreetingServiceImpl
+	
+						}
+	
+						@Override
+						public void onSuccess(Oggetto result) {
+							Window.alert("Oggetto venduto correttamente");
+						}
 
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Errore nel server"); //in GreetingServiceImpl
-
-					}
-
-					@Override
-					public void onSuccess(Oggetto result) {
-						Window.alert("Oggetto venduto correttamente");
-
-//						oggetto = result;
-//
-//						Asta asta = new Asta(venditore, oggetto, dataScadenza.getValue().toString(), true);
-
-					}
-
-				});
-				//}
+					});
+				} else {
+					Window.alert("Tutti i campi sono obbligatori");
+				}
 
 			}
 

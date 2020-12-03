@@ -34,9 +34,14 @@ public class VisualizzaOggettiVenduti extends Composite {
 
 	public VisualizzaOggettiVenduti(Oggetto oggetto) {
 		initWidget(uiBinder.createAndBindUi(this));
+		
 		final Element nomeOggetto= DOM.createLabel();
+		
 		nomeOggetto.setInnerHTML("<p>"+oggetto.getNome()+"</p>");
+		
 		final Element statoAsta = DOM.createLabel();
+		
+		//controllo che l'asta non sia scaduta
 		greetingService.statoOggetto(oggetto, new AsyncCallback<String>() {
 
 			@Override
@@ -52,7 +57,7 @@ public class VisualizzaOggettiVenduti extends Composite {
 		});
 		container.appendChild(nomeOggetto);
 		container.appendChild(statoAsta);
-		//da fare con tutto il resto
+		
 	}
 
 

@@ -30,9 +30,11 @@ public class Risposta implements Serializable{
 	}
 	*/
 	//, Admin admin, UtenteRegistrato utenteR
-	public Risposta(Domanda domanda, String contenuto) {
+	public Risposta(String id,Domanda domanda, String contenuto, Utente utente) {
+		this.idRisposta = id;
 		this.domanda=domanda;
 		this.contenuto=contenuto;
+		this.utente = utente;
 	}
 	
 	public String getIdRisposta() {

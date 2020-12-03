@@ -33,14 +33,14 @@ public class ContainerOggetti extends Composite {
 	}
 	Utente utenteGlobale = new Utente();
 	Oggetto oggGlobale = new Oggetto();
-
+	String dataScadenza=null;
 	
 	private final GreetingServiceAsync greetingService=GWT.create(GreetingService.class);
 
 
 	@UiField ParagraphElement nomeOggetto, descrizioneOggetto, prezzoOggetto, scadenzaOggetto, categoriaOggetto, ultimaOfferta;
 	@UiField InputElement question, importo;
-	//@UiField Button inviaDomanda;
+	@UiField Button inviaDomanda, inviaOfferta;
 	
 	public ContainerOggetti() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -51,21 +51,35 @@ public class ContainerOggetti extends Composite {
 		oggGlobale = oggetto;
 		utenteGlobale = utente;
 		
+		//metodo per stampare la data di scadenza nella visualizzazione degli oggetti in vendita
+		greetingService.viewScadenzaAsta(oggGlobale, new AsyncCallback<String>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				//errore nel server
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				dataScadenza = result;
+				scadenzaOggetto.setInnerText("Scade in data: "+dataScadenza);
+
+			}
+
+			
+		});
+		
 		nomeOggetto.setInnerText("Nome: "+oggetto.getNome());
 		descrizioneOggetto.setInnerText("Descrizione: "+ oggetto.getDescrizione());
 		prezzoOggetto.setInnerText("Prezzo iniziale: "+oggetto.getPrezzoBase());
-		//scadenzaOggetto.setInnerText("Scade in data: "+oggetto.getAsta().getScadenza());
-		categoriaOggetto.setInnerText("Categoria: "+oggetto.getCategoria());
+		categoriaOggetto.setInnerText("Categoria: "+oggetto.getCategoria().getCategoria());
 		ultimaOfferta.setInnerText(Double.toString(oggetto.getPrezzoBase()));
 		
-		
-		final Button domanda = new Button("Invia domanda");
-		RootPanel.get().add(domanda);
-		domanda.addClickHandler(new ClickHandler() {
+		inviaDomanda.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
+				//metodo per inserire una domanda nel db
 				greetingService.inviaDomanda(oggGlobale, utenteGlobale, question.getValue().toString().trim(), new AsyncCallback<Boolean>() {
 
 					@Override
@@ -87,13 +101,13 @@ public class ContainerOggetti extends Composite {
 				
 		});
 		
-		
+		//metodo per mostrare la domanda effettuata
 		greetingService.viewDomanda(oggGlobale.getIdOggetto(), new AsyncCallback<ArrayList<Domanda>>() {
 
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Non sono riuscito a prendere le domande");
+				Window.alert("Impossibile visualizzare le domande");
 			}
 
 			@Override
@@ -105,72 +119,37 @@ public class ContainerOggetti extends Composite {
 			}
 
 		});
-		
-		
-		final Button offri = new Button("Offri");
-		RootPanel.get().add(offri);
 	
 		
-		offri.addClickHandler(new ClickHandler() {
+		inviaOfferta.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				
-//				if(ultimaOfferta.getInnerText().equals("Ultimo prezzo : ")) {
-//					
-//					
-//				} else {
-//					if(Double.parseDouble(prezzoOggetto.getInnerText()) < Double.parseDouble(importo.getValue())) {
-//						greetingService.inserisciOfferta(oggGlobale, utenteGlobale, Double.parseDouble(importo.getValue()), new AsyncCallback<Boolean>() {
-//
-//							@Override
-//							public void onFailure(Throwable caught) {
-//								Window.alert("Non sono riuscito a inviare l'offerta");
-//							}
-//
-//							@Override
-//							public void onSuccess(Boolean result) {
-//								if(result) {
-//									Window.alert("Offerta inviata");
-//									
-//									ultimaOfferta.setInnerText(importo.getValue().toString());
-//								
-//								}
-//							}
-//						});
-//					}
-//				}
-				
-				
-//				
-//				if(Double.parseDouble(ultimaOfferta.getInnerText()) < Double.parseDouble(importo.getValue())) {
-//
-//				}
-				
 				if(Double.parseDouble(ultimaOfferta.getInnerText().trim()) > Double.parseDouble(importo.getValue())) {
-					Window.alert("Impossibile inserire un'offerta piÃ¹ bassa");
+					Window.alert("Impossibile inserire un'offerta piu&grave bassa");
 				}
 				else
 				{
+					//metodo per inserire l'offerta
 					greetingService.inserisciOfferta(oggGlobale, utenteGlobale, Double.parseDouble(importo.getValue()), new AsyncCallback<Boolean>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Non sono riuscito a inviare l'offerta");
+							Window.alert("Impossibile inviare l'offerta");
 						}
 
 						@Override
 						public void onSuccess(Boolean result) {
 							if(result) {
 								Window.alert("Offerta inviata");
-								
+								//sovrascrivo con l'ultima offerta più alta inserita
 								ultimaOfferta.setInnerText(importo.getValue().toString());
 							
 							}
 						}
 					});
 				}
-				
 				
 			}
 				

@@ -37,6 +37,7 @@ public class VisualizzazioneOggettiSemplice extends Composite implements HasText
 	public VisualizzazioneOggettiSemplice() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
+		//mostro gli oggetti per utenti non registrati
 		greetingService.visualzzaOggetti(new AsyncCallback<ArrayList<Oggetto>>() {
 
 			@Override
@@ -45,50 +46,21 @@ public class VisualizzazioneOggettiSemplice extends Composite implements HasText
 
 			}
 
-			//livello base, bisogna capire cosa succede quando ci sono gli oggetti,
-			//mancano ancora delle cose per creare intermanete l'oggetto
-			//da guardare come mettere i bottoni per fare un'offerta e rifare bene il costruttore per oggetto, cambiare anche 
-			//il metodo della messa in vendita
 			@Override
 			public void onSuccess(ArrayList<Oggetto> result) {
-				//
-
-				//if(result.getNome()==null || result.getDescrizione()==null || String.valueOf(result.getPrezzoBase())==null) {
-				//Window.alert("Oggetto inesistente");
-				//} else {
-				//al posto dell'alert mostra l'oggetto
+				
 				if(result == null) {
 					Window.alert("Nessun oggetto esistente");
 				}
 				else {
-					//result.forEach((n) -> {
-						//Window.alert(n.getNome());
 					for(int n=0; n<result.size(); n++) {
 						
 						final Label w = new Label();
-//						final Label spazio = new Label();
-//						final Label doppioSpazio = new Label();
-//						final Label prezzoAttuale = new Label();
-//					
-//						
-//						final Button domanda = new Button();
-//						domanda.setText("Domanda");
-//						final TextBox txtDomanda = new TextBox();
-//
-//						
-//						Button offri = new Button();
-//						offri.setText("Offri");
-//						final TextBox txtOfferta = new TextBox();
-						
+						//mostro solo nome, descrizione e prezzo
 						w.getElement().setInnerHTML("Nome : " + result.get(n).getNome() + "<br>" + 
 								"Descrizione : " + result.get(n).getDescrizione() + "<br>" +
 								"Prezzo : " + result.get(n).getPrezzoBase() + "<br><br>");
-						
-						
-//						spazio.getElement().setInnerHTML("<br>");
-//						doppioSpazio.getElement().setInnerHTML("<br><br>");
-
-
+				
 						RootPanel.get().add(w);
 						
 					}

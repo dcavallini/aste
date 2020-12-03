@@ -2,18 +2,69 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-	.important {
-		font-weight: bold;
+		div{
+		border-radius: 5px;
+ 		background-color: #f2f2f2;
+  		padding: 20px;
+		}
+	input[type=text], input[type=password] {
+	    width: 100%;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  resize: vertical;
 	}
+	
+	
+	* {
+  box-sizing: border-box;
+}
+
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+	
 	</ui:style>
 	<g:HTMLPanel>
 			<div>
 		  <label>Username:</label>
-		  <input type="text" ui:field="username"/>
+		  <input type="text" ui:field="username" placeholder="Inserisci il tuo username"/>
 		  <br></br>
 		  <label>Password:</label>
-		  <input type="password" ui:field="password"/>
+		  <input type="password" ui:field="password" placeholder="Inserisci la tua password"/>
 		  <br></br>  
+		  <br></br>
+		  <g:Button text="Invia" ui:field="login"/>
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

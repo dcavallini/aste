@@ -2,23 +2,78 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
+		div{
+		border-radius: 5px;
+ 		background-color: #f2f2f2;
+  		padding: 20px;
+		}
+	input[type=text], input[type=number], input[type=date] {
+	    width: 100%;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  resize: vertical;
+	}
+	
+	
+	* {
+  box-sizing: border-box;
+}
+
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
 	
 	</ui:style>
 	<g:HTMLPanel>
 		<div>
 			<label>Oggetto: </label>
-			<input type="text" ui:field="nome"/>
+			<input type="text" ui:field="nome" placeholder="Inserisci l'oggetto"/>
 			<br></br>
 			<label>Descrizione: </label>
-			<input type="text" ui:field="descrizione"/>
+			<input type="text" ui:field="descrizione" placeholder="Inserisci la descrizione"/>
 			<br></br>
 			<label>Prezzo base: </label>
-			<input type="number" ui:field="prezzoBase"/>
+			<input type="number" ui:field="prezzoBase" placeholder="Inserisci il prezzo di partenza"/>
 			<br></br>
 			<label>Data scadenza asta</label>
 			<input type="date" ui:field="dataScadenza"/>
+			<br></br>
 			<label>Categoria</label>
 			<g:ValueListBox ui:field="categoria"/> 
+			<br></br>
+			<br></br>
+			<g:Button ui:field="invia">Vendi oggetto</g:Button>
 			<!-- https://stackoverflow.com/questions/3038540/how-do-i-add-items-to-gwt-listbox-in-uibinder-ui-xml-template -->
 		</div>
 	</g:HTMLPanel>

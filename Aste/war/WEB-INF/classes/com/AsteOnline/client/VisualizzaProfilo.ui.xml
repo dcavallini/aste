@@ -2,10 +2,74 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
+				div{
+				border-radius: 5px;
+		 		background-color: #f2f2f2;
+		  		padding: 20px;
+				}
+			input[type=text], input[type=date], input[type=radio]{
+			    width: 100%;
+			  padding: 12px;
+			  border: 1px solid #ccc;
+			  border-radius: 4px;
+			  resize: vertical;
+			}
+			
+			
+			* {
+		  box-sizing: border-box;
+		}
+		
+		
+		p {
+		  padding: 12px 12px 12px 0;
+		  display: inline-block;
+		}
+		
+		
+		.col-25 {
+		  float: left;
+		  width: 25%;
+		  margin-top: 6px;
+		}
+		
+		.col-75 {
+		  float: left;
+		  width: 75%;
+		  margin-top: 6px;
+		}
+		
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
 		
 	</ui:style>
 	<g:HTMLPanel>
-	
-		<input type="text" ui:field="username"/>
+	<p ui:field="user"></p>
+	<br></br>
+	<p ui:field="nome"></p>
+	<br></br>
+	<p ui:field="cognome"></p>
+	<br></br>
+	<p ui:field="cell"></p>
+		<br></br>
+	<p ui:field="email"></p>
+		<br></br>
+	<p ui:field="cf"></p>
+		<br></br>
+	<p ui:field="indirizzo"></p>
+		<br></br>
+	<p ui:field="sesso"></p>
+		<br></br>
+	<p ui:field="dataNascita"></p>
+		<br></br>
+	<p ui:field="luogoNascita"></p>
+	<br></br>
+	<br></br>
+	<p ui:field="oggettiVenduti"></p>
+	<p ui:field="statoAsta"></p>
 	</g:HTMLPanel>
 </ui:UiBinder> 

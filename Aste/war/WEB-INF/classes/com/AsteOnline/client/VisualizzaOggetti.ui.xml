@@ -4,5 +4,6 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
+	<hr></hr>
 	</g:HTMLPanel>
 </ui:UiBinder> 

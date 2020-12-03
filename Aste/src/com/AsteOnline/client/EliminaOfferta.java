@@ -30,64 +30,55 @@ public class EliminaOfferta extends Composite implements HasText {
 	
 	public EliminaOfferta() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+		//prendo le offerte inserite
 		greetingService.viewOfferte(new AsyncCallback<ArrayList<Offerta>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Errore nel server"); //in GreetingServiceImpl
+				Window.alert("Impossibile visualizzare le offerte"); //in GreetingServiceImpl
 
 			}
 
-			//livello base, bisogna capire cosa succede quando ci sono gli oggetti,
-			//mancano ancora delle cose per creare intermanete l'oggetto
-			//da guardare come mettere i bottoni per fare un'offerta e rifare bene il costruttore per oggetto, cambiare anche 
-			//il metodo della messa in vendita
 			@Override
 			public void onSuccess(ArrayList<Offerta> result) {
-				//
-
-				//if(result.getNome()==null || result.getDescrizione()==null || String.valueOf(result.getPrezzoBase())==null) {
-				//Window.alert("Oggetto inesistente");
-				//} else {
-				//al posto dell'alert mostra l'oggetto
+				
 				if(result == null) {
-					Window.alert("Nessun oggetto esistente");
+					Window.alert("Nessun offerta esistente");
 				}
 				else {
-					//result.forEach((n) -> {
-						//Window.alert(n.getNome());
-					for(int n=0; n<result.size(); n++) {
+						for(int n=0; n<result.size(); n++) {
+						
 						
 						final Label w = new Label();
 						final Button b = new Button();
 						b.setText("Elimina");
 						
-						Offerta o = result.get(n);
+						final Offerta o = result.get(n);
 						
 						w.getElement().setInnerHTML("Importo : " + result.get(n).getImporto() + "<br>" + 
 								"Oggetto : " + result.get(n).getOggetto().getNome() + "<br>" +
 								"Utente : " + result.get(n).getUtente().getUsername() + "<br><br>");
 						
+						RootPanel.get().add(w);
+						RootPanel.get().add(b);
+						
 						b.addClickHandler(new ClickHandler() {
 
 							@Override
 							public void onClick(ClickEvent event) {
-								// TODO Auto-generated method stub
-								
+								//elimino le offerte selezionate
 								greetingService.eliminaOfferta(o, new AsyncCallback<Boolean>() {
 
 									@Override
 									public void onFailure(Throwable caught) {
-										// TODO Auto-generated method stub
-										
+										Window.alert("Impossibile eliminare l'offerta");
 									}
 
 									@Override
 									public void onSuccess(Boolean result) {
 										// TODO Auto-generated method stub
 										
-										Window.alert("Oggetto eliminato con successo");
+										Window.alert("Offerta eliminata con successo");
 										
 										RootPanel.get().clear();
 										

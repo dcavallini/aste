@@ -29,7 +29,7 @@ public class EliminaOggetto extends Composite implements HasText {
 
 	public EliminaOggetto() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+		//visualizzo gli oggetti in vendita
 		greetingService.visualzzaOggetti(new AsyncCallback<ArrayList<Oggetto>>() {
 
 			@Override
@@ -38,32 +38,22 @@ public class EliminaOggetto extends Composite implements HasText {
 
 			}
 
-			//livello base, bisogna capire cosa succede quando ci sono gli oggetti,
-			//mancano ancora delle cose per creare intermanete l'oggetto
-			//da guardare come mettere i bottoni per fare un'offerta e rifare bene il costruttore per oggetto, cambiare anche 
-			//il metodo della messa in vendita
 			@Override
 			public void onSuccess(ArrayList<Oggetto> result) {
-				//
-
-				//if(result.getNome()==null || result.getDescrizione()==null || String.valueOf(result.getPrezzoBase())==null) {
-				//Window.alert("Oggetto inesistente");
-				//} else {
-				//al posto dell'alert mostra l'oggetto
+				
 				if(result == null) {
 					Window.alert("Nessun oggetto esistente");
 				}
 				else {
-					//result.forEach((n) -> {
-						//Window.alert(n.getNome());
+					
 					for(int n=0; n<result.size(); n++) {
 						
 						final Label w = new Label();
 						final Button b = new Button();
 						b.setText("Elimina");
 						
-						Oggetto o = result.get(n);
-						
+						final Oggetto o = result.get(n);
+						//mostro le informazioni relative agli oggetti
 						w.getElement().setInnerHTML("Nome : " + result.get(n).getNome() + "<br>" + 
 								"Descrizione : " + result.get(n).getDescrizione() + "<br>" +
 								"Prezzo : " + result.get(n).getPrezzoBase() + "<br><br>");
@@ -72,19 +62,16 @@ public class EliminaOggetto extends Composite implements HasText {
 
 							@Override
 							public void onClick(ClickEvent event) {
-								// TODO Auto-generated method stub
-								
+								//elimino l'oggetto dal db 
 								greetingService.eliminaOggetto(o, new AsyncCallback<Boolean>() {
 
 									@Override
 									public void onFailure(Throwable caught) {
-										// TODO Auto-generated method stub
-										
+										Window.alert("Impossibile eliminare l'oggetto");
 									}
 
 									@Override
 									public void onSuccess(Boolean result) {
-										// TODO Auto-generated method stub
 										
 										Window.alert("Oggetto eliminato con successo");
 										

@@ -35,6 +35,7 @@ public class MostraDomanda extends Composite {
 
 	@UiField ParagraphElement question, answer, user;
 	@UiField InputElement risposta;
+	@UiField Button inviaRisposta;
 	
 	public MostraDomanda() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -48,19 +49,16 @@ public class MostraDomanda extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		question.setInnerText("Domanda: "+ domanda.getContenuto() );
 		user.setInnerText("Fatta dall'utente: "+ domanda.getUtente().getUsername());
-
-		final Button invia = new Button("Invia risposta");
-		RootPanel.get().add(invia);
 		
-		invia.addClickHandler(new ClickHandler () {
+		inviaRisposta.addClickHandler(new ClickHandler () {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				greetingService.inviaRisposta(domanda, risposta.getValue().toString().trim(), new AsyncCallback<Void>() {
+				greetingService.inviaRisposta(domanda, risposta.getValue().toString().trim(), utenteGlobale, new AsyncCallback<Void>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Non sono riuscito a inviare la risposta");
+						Window.alert("Impossibile inviare la risposta");
 					}
 
 					@Override
@@ -76,21 +74,20 @@ public class MostraDomanda extends Composite {
 			
 		});
 		
-		
+		//visualizzo le risposte per le domande inserite
 		greetingService.viewRisposta(domanda.getIdDomanda(), new AsyncCallback<ArrayList<Risposta>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Non � possibile visualizzare le risposte");
+				Window.alert("Non e&grave possibile visualizzare le risposte");
 			}
 
 			@Override
 			public void onSuccess(ArrayList<Risposta> risposte) {
 				for(int j=0; j<risposte.size(); j++) {
-					//MostraRisposta md = new MostraRisposta(risposte.get(j));
+
 					answer.setInnerText("Risposta: " + risposte.get(j).getContenuto());
 
-					//RootPanel.get().add(md);
 				}
 			}
 

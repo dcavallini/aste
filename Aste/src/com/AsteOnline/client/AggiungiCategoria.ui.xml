@@ -1,12 +1,64 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:C="urn:import:com.google.gwt.thirdparty.javascript.jscomp.ControlFlowGraph">
 	<ui:style>
-	.important {
-		font-weight: bold;
+		div{
+		border-radius: 5px;
+ 		background-color: #f2f2f2;
+  		padding: 20px;
+		}
+	p{
+	    width: 100%;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  resize: vertical;
 	}
+	
+	
+	* {
+  box-sizing: border-box;
+}
+
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
 	</ui:style>
 	<g:HTMLPanel>
-		
+		<label>Nuova categoria : </label>
+		<p ui:field="txtNuovaCategoria" placeholder="Definisci una nuova categoria"></p>
+		<br></br>
+		<br></br>
+		<g:Button text="Inserisci" ui:field="inserisci"/>
 	</g:HTMLPanel>
 </ui:UiBinder> 

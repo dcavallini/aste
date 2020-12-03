@@ -21,9 +21,10 @@ public interface GreetingService extends RemoteService {
 
 	ArrayList<Oggetto> visualzzaOggetti() throws IllegalArgumentException;
 
-	String addUser(String username, String nome, String cognome, String cell, String password, String email, String cf, String indirizzo);
+	String addUser(String username, String nome, String cognome, String cell, String password, String email, String cf,
+			String indirizzo, String sesso, String dataNascita, String luogoNascita);
 
-	Utente richiestaAccessoUtente(String username, String password);
+	//Utente richiestaAccessoUtente(String username, String password);
 	
 	boolean inserisciOfferta(Oggetto oggetto, Utente utente, double importo);
 	
@@ -43,9 +44,11 @@ public interface GreetingService extends RemoteService {
 
 	ArrayList<Domanda> viewDomanda(String idOggetto);
 	
+	ArrayList<Domanda> viewDomandaEliminazione();
+	
 	ArrayList<Risposta> viewRisposta(String idDomanda);
 	
-	void inviaRisposta(Domanda domanda, String contenuto);
+	void inviaRisposta(Domanda domanda, String contenuto, Utente utente);
 	
 	ArrayList<Offerta> viewOfferte();
 	
@@ -68,5 +71,15 @@ public interface GreetingService extends RemoteService {
 	boolean eliminaRisposta(Risposta risposta);
 	
 	Oggetto infoOggetto(String idOggetto);
+	
+	ArrayList<Domanda> viewDomandaPerUtente(String utente);
+	
+	ArrayList<Risposta> viewRispostaPerUtente(String utente);
+
+	ArrayList<Risposta> visualizzaTutteRisposte();
+	
+	String tmp();
+	
+	String viewScadenzaAsta(Oggetto oggetto);
 	
 }

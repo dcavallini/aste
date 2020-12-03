@@ -1,46 +1,104 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style>
-	
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	>
+<ui:style>
+				div{
+				border-radius: 5px;
+		 		background-color: #f2f2f2;
+		  		padding: 20px;
+				}
+			input[type=text], input[type=date], input[type=password]{
+			    width: 100%;
+			  padding: 12px;
+			  border: 1px solid #ccc;
+			  border-radius: 4px;
+			  resize: vertical;
+			}
+			
+			
+			* {
+		  box-sizing: border-box;
+		}
+		
+		
+		label {
+		  padding: 12px 12px 12px 0;
+		  display: inline-block;
+		}
+		
+		
+		.col-25 {
+		  float: left;
+		  width: 25%;
+		  margin-top: 6px;
+		}
+		
+		.col-75 {
+		  float: left;
+		  width: 75%;
+		  margin-top: 6px;
+		}
+		
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		
+		/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+		@media screen and (max-width: 600px) {
+		  .col-25, .col-75, .g-Button {
+		    width: 100%;
+		    margin-top: 0;
+		  }
+		}
+			
 	</ui:style>
 	<g:HTMLPanel>
 		<!-- tutto l'html di signIn-->
 		<div>
 		  <label>Username:</label>
-		  <input type="text" ui:field="username"/>
+		  <input type="text" ui:field="user" placeholder="Inserisci il tuo username"/>
 		  <br></br>
 		  <label>Nome:</label>
-		  <input type="text" ui:field="nome"/>
+		  <input type="text" ui:field="nome" placeholder="Inserisci il tuo nome"/>
 		  <br></br>
 		  <label>Cognome:</label>
-		  <input type="text" ui:field="cognome"/>
+		  <input type="text" ui:field="cognome" placeholder="Inserisci il tuo cognome"/>
 		  <br></br>
 		  <label>Password:</label>
-		  <input type="password" ui:field="password"/>
+		  <input type="password" ui:field="password" placeholder="Inserisci la tua password"/>
 		  <br></br>
 		  <label>Telefono:</label>
-		  <input type="text" ui:field="cell"/>
+		  <input type="text" ui:field="cell" placeholder="Inserisci il tuo numero di telefono"/>
 		  <br></br>
 		  <label>Email:</label>
-		  <input type="text" ui:field="email"/>
+		  <input type="text" ui:field="email" placeholder="Inserisci la tua email"/>
 		  <br></br>
 		  <label>Codice fiscale:</label>
-		  <input type="text" ui:field="cf"/>
+		  <input type="text" ui:field="cf" placeholder="Inserisci il tuo codice fiscale"/>
 		  <br></br>
 		  <label>Indirizzo di domicilio:</label>
-		  <input type="text" ui:field="indirizzo"/>
+		  <input type="text" ui:field="indirizzo" placeholder="Inserisci il tuo indirizzo"/>
 		  <br></br>
 		  <label>Sesso:</label>
-		  <input type="text" ui:field="sesso"/>
+		  <input type="radio" ui:field="sessoF"/>
+		  <label for="female">F</label>
+		  
+		  <input type="radio" ui:field="sessoM"/>
+		  <label for="male">M</label>
 		  <br></br>
 		  <label>Data di nascita:</label>
-		  <input type="text" ui:field="dataNascita"/>
+		  <input type="date" ui:field="dataNascita"/>
 		  <br></br>
 		  <label>Luogo di nascita</label>
-		  <input type="text" ui:field="luogoNascita"/>
+		  <input type="text" ui:field="luogoNascita" placeholder="Inserisci il tuo luogo di nascita"/>
 		  <br></br>
-		  
+		  <br></br>
+		  <g:Button text="Salva" ui:field="salva"/>
 		  
 		</div>
 	</g:HTMLPanel>

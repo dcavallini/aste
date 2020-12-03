@@ -23,10 +23,9 @@ public interface GreetingServiceAsync {
 	void visualzzaOggetti(AsyncCallback<ArrayList<Oggetto>> asyncCallback);
 	
 	void addUser(String username, String nome, String cognome, String cell, String password, String email, String cf,
-			String indirizzo, AsyncCallback<String> callback);
+			String indirizzo, String sesso, String dataNascita, String luogoNascita, AsyncCallback<String> callback);
 
-	void richiestaAccessoUtente(String username, String password,
-			AsyncCallback<Utente> asyncCallback);
+	//void richiestaAccessoUtente(String username, String password,AsyncCallback<Utente> asyncCallback);
 	
 	void inserisciOfferta(Oggetto oggetto, Utente utente, double importo, AsyncCallback<Boolean> asyncCallback);
 	
@@ -68,6 +67,18 @@ public interface GreetingServiceAsync {
 	
 	void infoOggetto(String idOggetto, AsyncCallback<Oggetto> ascynCallback);
 	
-	void inviaRisposta(Domanda domanda, String contenuto, AsyncCallback<Void> callback);
+	void inviaRisposta(Domanda domanda, String contenuto, Utente utente, AsyncCallback<Void> callback);
+
+	void viewDomandaEliminazione(AsyncCallback<ArrayList<Domanda>> callback);
+
+	void viewDomandaPerUtente(String utente, AsyncCallback<ArrayList<Domanda>> callback);
+
+	void viewRispostaPerUtente(String utente, AsyncCallback<ArrayList<Risposta>> callback);
+
+	void visualizzaTutteRisposte(AsyncCallback<ArrayList<Risposta>> asyncCallback);
+
+	void tmp(AsyncCallback<String> callback);
+	
+	void viewScadenzaAsta(Oggetto oggetto, AsyncCallback<String> callback);
 	
 }

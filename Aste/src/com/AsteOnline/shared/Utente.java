@@ -38,6 +38,19 @@ public class Utente implements Serializable{
 		this.indirizzo=indirizzo;
 	}
 	
+	public Utente(String username, String nome, String cognome, String cell, String password, String email, String cod_fiscale, String indirizzo, String sesso, String dataNascita, String luogoNascita){
+		this.username=username;
+		this.nome=nome;
+		this.cognome=cognome;
+		this.cell=cell;
+		this.password=password;
+		this.email=email;
+		this.cod_fiscale=cod_fiscale;
+		this.indirizzo=indirizzo;
+		this.sesso=sesso;
+		this.dataNascita=dataNascita;
+		this.luogoNascita=luogoNascita;
+	}
 	/*
 	public Oggetto getOggetto() {
 		return oggetto;
@@ -75,6 +88,19 @@ public class Utente implements Serializable{
 	public String getIndirizzo() {
 		return indirizzo;
 	}
+	
+	public String getSesso() {
+		return sesso;
+	}
+	
+	public String getDataNascita() {
+		return dataNascita;
+	}
+	
+	public String getLuogoNascita() {
+		return luogoNascita;
+	}
+	
 	
 	
 	public class Admin extends Utente{

@@ -60,17 +60,11 @@ public class MenuUtenteRegistrato extends Composite implements HasText {
 					apriPaginaVenditaOggetto();
 				}else if(tokenAttuale.equals("visualizzaOggetti")) {
 					apriVisualizzaOggetti();
-				}else if(tokenAttuale.equals("visualizzaDomande")) {
-					apriVisualizzaDomande();
-				}else if(tokenAttuale.equals("visualizzaRisposte")) {
-					apriVisualizzaRisposte();
 				} else if(tokenAttuale.equals("amministrazione")) {
 					apriAmministrazione();
-				} else if(tokenAttuale.equals("visualizzaDomande")) {
-					apriVisualizzaDomande();
-				} else if(tokenAttuale.equals("visualizzaRisposte")) {
-					apriVisualizzaRisposte();
-				} else {
+				} else if(tokenAttuale.equals("home")){
+					tornaHomePage();
+				}else {
 					String idOggetto = tokenAttuale.trim();
 					greetingService.infoOggetto(idOggetto, new AsyncCallback<Oggetto>() {
 
@@ -117,20 +111,6 @@ public class MenuUtenteRegistrato extends Composite implements HasText {
 		RootPanel.get().add(vo);
 	}
 	
-	public void apriVisualizzaDomande() {
-		//da implementare la ui binder
-		RootPanel.get().clear();
-		VisualizzaDomanda vd = new VisualizzaDomanda();
-		RootPanel.get().add(vd);
-	}
-	
-	public void apriVisualizzaRisposte() {
-		//da implementare la ui binder
-		RootPanel.get().clear();
-		VisualizzaRisposta vd = new VisualizzaRisposta();
-		RootPanel.get().add(vd);
-	}
-	
 	public void apriAmministrazione() {
 		RootPanel.get().clear();
 		Amministrazione amministrazione = new Amministrazione();
@@ -142,30 +122,37 @@ public class MenuUtenteRegistrato extends Composite implements HasText {
 		ContainerOggetti container = new ContainerOggetti(oggetto, utente);
 		RootPanel.get().add(container);
 	}
+	
+	public void tornaHomePage() {
+		
+		Window.Location.reload();
+		
+	}
 
 
 	private void hyperLinks() {
-		//definisci qui la tua homepage
-		Hyperlink datiUtente = new Hyperlink("Visualizza i dati di un utente", "datiUtente");
-		RootPanel.get().add(datiUtente);
-
-		Hyperlink domande = new Hyperlink("Visualizza le domande che ti sono state fatte", "visualizzaDomande");
-		RootPanel.get().add(domande);
-		
-		Hyperlink risposte = new Hyperlink("Visualizza le risposte che hai ricevuto", "visualizzaRisposte");
-		RootPanel.get().add(risposte);
-
-		Hyperlink vendiOggetto = new Hyperlink("Metti un oggetto in vendita", "vendiOggetto");
-		RootPanel.get().add(vendiOggetto);
-
-		Hyperlink visualizzaOggetti = new Hyperlink("Visualizza gli oggetti messi in vendita", "visualizzaOggetti");
-		RootPanel.get().add(visualizzaOggetti);
+		//definisci qui la tua homepage		
+		Hyperlink logOut = new Hyperlink("Logout", "home");
+		RootPanel.get().add(logOut);
 		
 		Hyperlink amministrazioneAdmin = new Hyperlink("Amministrazione", "amministrazione");
 
 		
 		if(username.equals("admin")) {
 			RootPanel.get().add(amministrazioneAdmin);
+			RootPanel.get().add(logOut);
+		} else {
+			Hyperlink datiUtente = new Hyperlink("Visualizza i dati di un utente", "datiUtente");
+			RootPanel.get().add(datiUtente);
+
+			Hyperlink vendiOggetto = new Hyperlink("Metti un oggetto in vendita", "vendiOggetto");
+			RootPanel.get().add(vendiOggetto);
+
+			Hyperlink visualizzaOggetti = new Hyperlink("Visualizza gli oggetti messi in vendita", "visualizzaOggetti");
+			RootPanel.get().add(visualizzaOggetti);
+			
+			RootPanel.get().add(logOut);
+
 		}
 	}
 

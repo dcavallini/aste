@@ -2,21 +2,69 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-	
+	div{
+				border-radius: 5px;
+		 		background-color: #f2f2f2;
+		  		padding: 20px;
+				}
+			input[type=text], input[type=date], input[type=radio]{
+			    width: 100%;
+			  padding: 12px;
+			  border: 1px solid #ccc;
+			  border-radius: 4px;
+			  resize: vertical;
+			}
+			
+			* {
+		  box-sizing: border-box;
+		}
+		
+		
+		label, p {
+		  padding: 12px 12px 12px 0;
+		  display: inline-block;
+		}
+		
+		
+		.col-25 {
+		  float: left;
+		  width: 25%;
+		  margin-top: 6px;
+		}
+		
+		.col-75 {
+		  float: left;
+		  width: 75%;
+		  margin-top: 6px;
+		}
+		
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
 	</ui:style>
 	<g:HTMLPanel>
 	
 		<p ui:field="nomeOggetto"></p>
+		<br></br>
 		<p ui:field="descrizioneOggetto"></p>
+		<br></br>
 		<p ui:field="prezzoOggetto"></p>
+		<br></br>
 		<p ui:field="scadenzaOggetto"></p>
+		<br></br>
 		<p ui:field="categoriaOggetto"></p>
+		<br></br>
 		<p ui:field="ultimaOfferta"></p>
-		
-		<input type="text" ui:field="question"></input>
+		<br></br>
+		<input type="text" ui:field="question" placeholder="Inserisci la domanda"></input>
 		<g:Button text="Invia domanda" ui:field="inviaDomanda"/>
-		<input type="text" ui:field="importo"></input>
-		
+		<br></br><br></br>
+		<input type="text" ui:field="importo" placeholder="Inserisci l'offerta"></input>
+		<g:Button text="Invia offerta" ui:field="inviaOfferta"/>
+		<hr></hr>
 		
 		
 	</g:HTMLPanel>

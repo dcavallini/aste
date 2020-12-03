@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.AsteOnline.shared.Categoria;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -31,25 +32,27 @@ public class EliminaCategoria extends Composite implements HasText {
 
 	public EliminaCategoria() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+				
 		final ValueListBox<String> categoria = new ValueListBox<String>();
-
+		
+		categoria.getElement().getStyle().setBackgroundColor("#f1f1f1");
+		categoria.getElement().getStyle().setWidth(1255, Unit.PX);
+		categoria.getElement().getStyle().setPadding(10, Unit.PX);
+		
 		final ArrayList<String> nomiCategorie = new ArrayList<String>();
 		
 		final ArrayList<Categoria> totCategorie = new ArrayList<Categoria>();
 
+		//metodo per popolare la listbox delle categorie
 		greetingService.inizializzazioneCategorie(new AsyncCallback<ArrayList<Categoria>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
 				Window.alert(caught.toString());
 			}
 
 			@Override
 			public void onSuccess(ArrayList<Categoria> result) {
-				// TODO Auto-generated method stub
-
 
 				for(int i = 0; i < result.size(); i++) {
 					String tmp = result.get(i).getCategoria();
@@ -59,46 +62,47 @@ public class EliminaCategoria extends Composite implements HasText {
 				
 
 				categoria.setAcceptableValues(nomiCategorie);
-			}
-		});
-
-		RootPanel.get().add(categoria);
-		
-		final Button invia = new Button();
-		invia.setText("Elimina");
-		
-		
-		
-		invia.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
+				final Label labCat = new Label("Seleziona la categoria: ");
+				RootPanel.get().add(labCat);
+				RootPanel.get().add(categoria);
 				
-				Categoria c = new Categoria();
-				for(int i = 0; i < totCategorie.size(); i++) {
-					if(totCategorie.get(i).getCategoria().equals(categoria.getValue())) {
-						c = totCategorie.get(i);
-					}	
-				}
+				final Button invia = new Button();
+				invia.setText("Elimina");
 				
-				greetingService.eliminaCategoria(c, new AsyncCallback <Boolean>() {
+				RootPanel.get().add(invia);
+				
+				
+				invia.addClickHandler(new ClickHandler() {
 
 					@Override
-					public void onFailure(Throwable caught) {
+					public void onClick(ClickEvent event) {
 						
-					}
+						Categoria c = new Categoria();
+						for(int i = 0; i < totCategorie.size(); i++) {
+							if(totCategorie.get(i).getCategoria().equals(categoria.getValue())) {
+								c = totCategorie.get(i);
+							}	
+						}
+						//elimino la categoria
+						greetingService.eliminaCategoria(c, new AsyncCallback <Boolean>() {
 
-					@Override
-					public void onSuccess(Boolean result) {
-						Window.alert("Categoria eliminata con successo");
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("Impossibile eliminare la categoria");
+							}
+
+							@Override
+							public void onSuccess(Boolean result) {
+								Window.alert("Categoria eliminata con successo");
+							}
+							
+						});
 					}
-					
+								
 				});
 			}
-						
 		});
-		
-		RootPanel.get().add(invia);
+
 	}
 
 	@Override

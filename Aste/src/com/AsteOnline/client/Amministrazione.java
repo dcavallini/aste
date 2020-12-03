@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -22,8 +23,8 @@ public class Amministrazione extends Composite {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		History.newItem("MenuAdmin");
-
+		//History.newItem("MenuAdmin");	
+		
 		hyperLinks();
 
 		History.addValueChangeHandler(new ValueChangeHandler<String> () {
@@ -47,6 +48,8 @@ public class Amministrazione extends Composite {
 					rinominaCategoria();
 				}else if(tokenAttuale.equals("delDom")) {
 					eliminaDomanda();
+				}else if(tokenAttuale.equals("delRisp")) {
+					eliminaRisposta();
 				}
 			}
 
@@ -60,7 +63,7 @@ public class Amministrazione extends Composite {
 	}
 
 	public void aggiungiCategoria() {
-		RootPanel.get().clear();
+		//RootPanel.get().clear();
 		AggiungiCategoria add = new AggiungiCategoria();
 		RootPanel.get().add(add);
 	} 
@@ -94,6 +97,12 @@ public class Amministrazione extends Composite {
 		EliminaDomanda delDom = new EliminaDomanda();
 		RootPanel.get().add(delDom);
 	}
+	
+	public void eliminaRisposta() {
+		RootPanel.get().clear();
+		EliminaRisposta delRisp = new EliminaRisposta();
+		RootPanel.get().add(delRisp);
+	}
 
 	private void hyperLinks() {
 		//definisci qui la tua homepage
@@ -107,18 +116,19 @@ public class Amministrazione extends Composite {
 		RootPanel.get().add(delOggetto);
 		
 		Hyperlink delOff = new Hyperlink("Elimina offerta", "delOf");
-		RootPanel.get().add(delOggetto);
+		RootPanel.get().add(delOff);
 		
 		Hyperlink delCat = new Hyperlink("Elimina categoria", "delCat");
 		RootPanel.get().add(delCat);
 		
-		Hyperlink rinCat = new Hyperlink("Elimina offerta", "rinCat");
+		Hyperlink rinCat = new Hyperlink("Rinomina categoria", "rinCat");
 		RootPanel.get().add(rinCat);
 		
 		Hyperlink delDom = new Hyperlink("Elimina domanda", "delDom");
 		RootPanel.get().add(delDom);
+		
+		Hyperlink delRisp = new Hyperlink("Elimina risposta", "delRisp");
+		RootPanel.get().add(delRisp);
 	}
 	
-	
-
 }
